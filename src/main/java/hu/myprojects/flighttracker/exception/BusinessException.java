@@ -5,11 +5,11 @@ import java.util.Map;
 public class BusinessException extends RuntimeException {
 
     public BusinessException(String message, Class entityClass, Map<String, String> args) {
-        super(message + "\nEntityClass: " + entityClass.getSimpleName() + "\nArgs: " + args.toString());
+        super(message + " - EntityClass: " + entityClass.getSimpleName() + " - Args: " + args.toString());
     }
 
     public BusinessException(String message, Class entityClass) {
-        super(message + "\nEntityClass: " + entityClass.getSimpleName());
+        super(message + " - EntityClass: " + entityClass.getSimpleName());
     }
 
     public BusinessException(String message) {
