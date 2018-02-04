@@ -14,7 +14,6 @@
 	});
 </script>
 <body>
-<h1>Flight List</h1>
 <div>
     <p>
         <a th:href="@{/flight/insert}">Insert flight</a>
@@ -30,7 +29,8 @@
     <input type="text" th:name="endTime" th:placeholder="To" />
     <button type="submit">Search</button>
 </form>
-
+<br/>
+<h3>Flight List</h3>
 <table border="1">
     <thead>
     <tr>
