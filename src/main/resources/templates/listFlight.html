@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Flight List</title>
+</head>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+<script>
+	$(document).ready(function() {
+		$.ajax({
+			url : "/spring-thymeleaf/js",
+		});
+	});
+</script>
+<body>
+<h1>Flight List</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Flight code</th>
+        <th>Departure time</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="flight: ${flights}">
+        <td th:text="${flight.id}" />
+        <td th:text="${flight.code}" />
+        <td th:text="${flight.departureTime}" />
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

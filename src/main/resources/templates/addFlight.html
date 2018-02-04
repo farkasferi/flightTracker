@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add flight</title>
+</head>
+<body>
+<h1>Add flight</h1>
+<form action="#" th:action="@{/flight/insert}" th:object="${flight}"
+      method="post">
+    <ul>
+        <li th:errors="*{code}" />
+        <li th:errors="*{departureTime}" />
+    </ul>
+    <table border="1">
+        <tr>
+            <td>Code</td>
+            <td><input type="text" th:field="*{code}" /></td>
+        </tr>
+        <tr>
+            <td>Departure time</td>
+            <td><input type="text" th:field="*{departureTime}" /></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Submit" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

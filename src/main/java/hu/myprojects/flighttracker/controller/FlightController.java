@@ -2,16 +2,19 @@ package hu.myprojects.flighttracker.controller;
 
 import hu.myprojects.flighttracker.dao.FlightRepository;
 import hu.myprojects.flighttracker.domain.Flight;
-import hu.myprojects.flighttracker.exception.BusinessException;
 import hu.myprojects.flighttracker.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@RestController
+@Controller
 public class FlightController {
 
     @Autowired
@@ -20,11 +23,24 @@ public class FlightController {
     @Autowired
     private FlightRepository repository;
 
-    @RequestMapping(value = "/flight", method = RequestMethod.POST)
-    public void insertFlight(
-            @RequestBody Flight flight){
+    @RequestMapping(value = "/flight/insert", method = RequestMethod.POST)
+    public String insertFlight(
+            @Valid @ModelAttribute Flight flight, BindingResult errors, Model model){
 
-        flightService.insertFlight(flight);
+        if (!errors.hasErrors()) {
+            flightService.insertFlight(flight);
+            List<Flight> flights = repository.findAll();
+            model.addAttribute("flights",flights);
+        }
+        return ((errors.hasErrors()) ? "addFlight.html" : "listFlight.html");
+    }
+
+    @RequestMapping(value = "/flight/add", method = RequestMethod.GET)
+    public String addFlight(
+            Model model){
+
+        model.addAttribute("flight", new Flight());
+        return "addFlight.html";
     }
 
     @RequestMapping(value = "/flight/update", method = RequestMethod.POST)
@@ -41,10 +57,11 @@ public class FlightController {
         flightService.deleteFlight(id);
     }
 
-    @RequestMapping(value = "/flight/list", method = RequestMethod.GET)
-    public @ResponseBody Iterable<Flight> listFlight() {
-
-        return repository.findAll();
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String listFlight(Model model) {
+        List<Flight> flights = repository.findAll();
+        model.addAttribute("flights", flights);
+        return "listFlight.html";
     }
 
     @RequestMapping(value = "/flight/get/interval", method = RequestMethod.GET)
