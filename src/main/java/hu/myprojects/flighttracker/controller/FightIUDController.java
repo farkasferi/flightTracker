@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
-public class FlightController {
+public class FightIUDController {
 
     @Autowired
     private FlightService flightService;
@@ -67,27 +67,5 @@ public class FlightController {
         List<Flight> flights = repository.findAll();
         model.addAttribute("flights",flights);
         return "listFlight.html";
-    }
-
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String listFlight(Model model) {
-
-        List<Flight> flights = repository.findAll();
-        model.addAttribute("flights", flights);
-        return "listFlight.html";
-    }
-
-    @RequestMapping(value = "/flight/get/interval", method = RequestMethod.GET)
-    public @ResponseBody List<Flight> getFlightByDepartureTime(
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startTime,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endTime) {
-
-        if (startTime == null) {
-            startTime = LocalDateTime.of(2000, 1, 1, 0, 0);
-        }
-        if (endTime == null) {
-            endTime = LocalDateTime.of(9999, 1, 1, 0, 0);
-        }
-        return repository.findByDepartureTimeBetween(startTime, endTime);
     }
 }
