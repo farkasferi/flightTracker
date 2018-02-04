@@ -13,4 +13,6 @@ The application currently using
 * Thymeleaf template engine, for navigating, an showing UI in web browser.
 * JUnit fot unit and integration testing
 
+Currently only ISO 8601 DateTime formats work (yyyy-MM-dd'T'HH:mm:ss.SSSZ  eg. 2018-02-14T14:30)
+
 The project can run on spring's embedded tomcat application server, but it was tested on Wildfly 11 too.
