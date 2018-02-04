@@ -15,12 +15,21 @@
 </script>
 <body>
 <h1>Flight List</h1>
+<div>
+    <p>
+        <a th:href="@{/flight/insert}">Insert flight</a>
+    </p>
+    <p>
+        <a th:href="@{/flight/update}">Update flight</a>
+    </p>
+</div>
 <table border="1">
     <thead>
     <tr>
         <th>ID</th>
         <th>Flight code</th>
         <th>Departure time</th>
+        <th>Delete</th>
     </tr>
     </thead>
     <tbody>
@@ -28,6 +37,11 @@
         <td th:text="${flight.id}" />
         <td th:text="${flight.code}" />
         <td th:text="${flight.departureTime}" />
+        <td>
+            <form action="#" th:action="@{/flight/delete/} + ${{flight.id}}" method="post">
+                <button type="submit" value="Submit" class="btn btn-danger">Delete</button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>
