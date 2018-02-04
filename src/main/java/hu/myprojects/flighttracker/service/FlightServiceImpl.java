@@ -30,10 +30,10 @@ public class FlightServiceImpl implements FlightService {
     }
 
     private void checkId(Flight flight){
-        if (flight.getId() > 0) {
+        if (flight.getId() != 0) {
             Map<String, String> args = new HashMap<>();
             args.put("Id:", Long.toString(flight.getId()));
-            throw new BusinessException("Flight already exists.", Flight.class, args);
+            throw new BusinessException("Flight id must be 0", Flight.class, args);
         }
     }
 
